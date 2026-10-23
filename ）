@@ -1,7 +1,0 @@
-
-> svg-editor-cli@0.1.0 cli
-> tsx src/main.ts # 交互式编辑器（REPL，提示符 svg
-
-svg-editor 0.1 — type 'help' for commands
-
-svg> 
