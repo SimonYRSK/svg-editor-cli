@@ -1,4 +1,5 @@
 import { UsageError } from '../../model/errors/UsageError.js';
+import { NounCount } from '../../model/text/NounCount.js';
 import type { FileStore } from '../../io/FileStore.js';
 import type { SvgReader } from '../../io/SvgReader.js';
 import type { Command } from '../Command.js';
@@ -24,7 +25,7 @@ export class ReadCommand implements Command {
     const text = this.files.readText(path);
     const result = this.reader.read(text);
     editor.open(result.document, path);
-    const summary = `read ${path} (${result.document.countShapes()} elements)`;
+    const summary = `read ${path} (${NounCount.of(result.document.countShapes(), 'element')})`;
     return [...result.warnings, summary].join('\n');
   }
 }

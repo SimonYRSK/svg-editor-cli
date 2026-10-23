@@ -2,6 +2,7 @@ import { NotAContainerError } from '../../model/errors/NotAContainerError.js';
 import { UngroupCompositeError } from '../../model/errors/UngroupCompositeError.js';
 import { UngroupTopLevelError } from '../../model/errors/UngroupTopLevelError.js';
 import { UsageError } from '../../model/errors/UsageError.js';
+import { NounCount } from '../../model/text/NounCount.js';
 import { ContainerShape } from '../../model/shapes/ContainerShape.js';
 import type { Shape } from '../../model/shapes/Shape.js';
 import { EditCommand } from '../EditCommand.js';
@@ -49,7 +50,7 @@ export class UngroupCommand extends EditCommand {
     this.parent = parent;
     this.index = index;
     this.promoted = children;
-    return `${shape.reference} ungrouped (${children.length} children promoted)`;
+    return `${shape.reference} ungrouped (${NounCount.of(children.length, 'child', 'children')} promoted)`;
   }
 
   undo(): string {
@@ -58,7 +59,7 @@ export class UngroupCommand extends EditCommand {
     for (const child of this.promoted) parent.removeChild(child);
     parent.insertChild(this.index, group);
     for (const child of this.promoted) group.appendChild(child);
-    return `${group.reference} regrouped (${this.promoted.length} children)`;
+    return `${group.reference} regrouped (${NounCount.of(this.promoted.length, 'child', 'children')})`;
   }
 
   redo(): string {
@@ -73,7 +74,7 @@ export class UngroupCommand extends EditCommand {
       group.removeChild(child);
       parent.insertChild(this.index + offset, child);
     });
-    return `${group.reference} ungrouped (${this.promoted.length} children promoted)`;
+    return `${group.reference} ungrouped (${NounCount.of(this.promoted.length, 'child', 'children')} promoted)`;
   }
 
   private requireGroup(): ContainerShape {

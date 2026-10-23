@@ -1,5 +1,6 @@
 import { MissingSourcePathError } from '../../model/errors/MissingSourcePathError.js';
 import { UsageError } from '../../model/errors/UsageError.js';
+import { NounCount } from '../../model/text/NounCount.js';
 import type { FileStore } from '../../io/FileStore.js';
 import type { SvgWriter } from '../../io/SvgWriter.js';
 import type { Command } from '../Command.js';
@@ -27,6 +28,6 @@ export class SaveCommand implements Command {
     this.files.writeText(path, this.writer.write(document));
     document.setSourcePath(path);
     editor.history.lockAfterIo();
-    return `saved to ${path} (${document.countShapes()} elements)`;
+    return `saved to ${path} (${NounCount.of(document.countShapes(), 'element')})`;
   }
 }

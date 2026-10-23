@@ -13,7 +13,7 @@
 
 | 模块（目录） | 职责 | 关键类 |
 |---|---|---|
-| `src/model/` | **领域模型**：图形树、几何、文档、错误语义。不依赖任何其它层，也不做 IO、不做解析、不做打印 | `Shape`（抽象根）、`ContainerShape`、`Group`、`Rect`、`Circle`、`Ellipse`、`Line`、`Text`、`RootNode`、`Document`、`ShapeTypeRegistry`、`ShapeTypeProvider`、`EditorError` 及其 25 个子类、`NumberText`、`Point` |
+| `src/model/` | **领域模型**：图形树、几何、文档、错误语义。不依赖任何其它层，也不做 IO、不做解析、不做打印 | `Shape`（抽象根）、`ContainerShape`、`Group`、`Rect`、`Circle`、`Ellipse`、`Line`、`Text`、`RootNode`、`Document`、`ShapeTypeRegistry`、`ShapeTypeProvider`、`EditorError` 及其 25 个子类、`NumberText`、`Point`、`NounCount` |
 | `src/io/` | **持久化适配**：SVG 文本 <-> `Document`，以及唯一的文件系统访问点 | `SvgReader`、`SvgWriter`、`XmlTreeParser`、`AutoIdAssigner`、`FileStore`（接口）、`NodeFileStore` |
 | `src/app/` | **应用层**：命令对象、撤销栈、编辑器会话。它是"用户意图"的落点，不含任何终端 / 文件系统细节 | `Command`（接口）、`EditCommand`、`CommandRegistry`、`History`、`Editor`、`commands/*Command`（15 个命令类，覆盖 16 个命令名） |
 | `src/presentation/cli/` | **表示层**：分词、行解释（invoker）、树/明细格式化、REPL 循环 | `LineTokenizer`、`LineInterpreter`、`TreeFormatter`、`ShowFormatter`、`Repl`、`commands/TreeCommand|ShowCommand|HelpCommand|ExitCommand` |
@@ -246,6 +246,13 @@ npm error Your cache folder contains root-owned files ...
 
 先把作业 §6 的 19 条命令原样回放，发现输出与文档逐字符一致（包括 `├──`、空格列、`warning:` 行序），才继续补 §6.1 与错误表。这一步的价值在事后很明显：`read` 的告警行必须排在摘要行之前、`tree` 的属性列必须全局对齐，这两点都是回放时暴露的，靠"读文档想象"很容易写错。
 
+### 2.9 最后一轮打磨（输出文案与标点）
+
+交付前通读全部输出文案，做了两件小事：
+
+1. **数量词**：`group` / `ungroup` / `scale` / `read` / `save` 的回显都带数量，n=1 时原先会打成 "1 children"。抽出 `NounCount` 值对象统一处理单复数（`1 child` / `2 children`），五个命令共用一处规则。作业样例从未出现 n=1 的句子，因此不影响与样例逐字符一致。
+2. **标点**：代码注释里统一不用长破折号，改用冒号、逗号或括号（替换后逐条复查了 `Document`、`LineInterpreter` 两处读起来别扭的句子并重写）。这一条不改变任何行为，只是让注释在纯文本编辑器里也稳定可读。
+
 ---
 
 ## 3. 一致性自查
@@ -292,7 +299,7 @@ npm error Your cache folder contains root-owned files ...
 
 | 手段 | 结果 |
 |---|---|
-| `npm test`（vitest，9 个文件） | **186 个用例全部通过** |
+| `npm test`（vitest，9 个文件） | **187 个用例全部通过** |
 | `npm run typecheck`（`strict` + `noImplicitOverride` + `noUnusedLocals/Parameters`，覆盖 `src` 与 `tests`） | 0 错误 |
 | `npm run build`（`tsc` 到 `dist/`，NodeNext ESM） | 成功，`node dist/main.js` 可直接运行 |
 | 架构规则测试 | 依赖方向、`node:fs` 位置、禁用 `switch` 三条硬规则机械守住 |

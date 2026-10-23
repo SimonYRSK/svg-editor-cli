@@ -52,7 +52,7 @@ describe('structural commands', () => {
   it('gives the new group the position of the first collected shape', () => {
     const session = new Session();
     session.runAll(['init', 'create rect a 0 0 10 10', 'create rect b 0 0 10 10', 'create rect c 0 0 10 10']);
-    expect(session.run('group gx b')).toEqual(['g#gx created with 1 children']);
+    expect(session.run('group gx b')).toEqual(['g#gx created with 1 child']);
     expect(session.run('tree')).toEqual([
       'svg (800x600)',
       '├── rect#a      x=0 y=0 w=10 h=10',

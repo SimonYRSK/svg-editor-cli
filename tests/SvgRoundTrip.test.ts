@@ -16,7 +16,7 @@ describe('reading SVG files', () => {
     const session = new Session({
       'vb.svg': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240"><rect id="r" x="0" y="0" width="1" height="1"/></svg>',
     });
-    expect(session.run('read vb.svg')).toEqual(['read vb.svg (1 elements)']);
+    expect(session.run('read vb.svg')).toEqual(['read vb.svg (1 element)']);
     expect(session.run('canvas')).toEqual(['canvas 320x240']);
   });
 
@@ -26,7 +26,7 @@ describe('reading SVG files', () => {
     });
     expect(session.run('read p.svg')).toEqual([
       'warning: unsupported element <path> skipped',
-      'read p.svg (1 elements)',
+      'read p.svg (1 element)',
     ]);
   });
 

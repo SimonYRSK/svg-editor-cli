@@ -1,5 +1,6 @@
 import { GroupCycleError } from '../../model/errors/GroupCycleError.js';
 import { UsageError } from '../../model/errors/UsageError.js';
+import { NounCount } from '../../model/text/NounCount.js';
 import type { Placement } from '../../model/document/Placement.js';
 import { ContainerShape } from '../../model/shapes/ContainerShape.js';
 import type { Shape } from '../../model/shapes/Shape.js';
@@ -52,7 +53,7 @@ export class GroupCommand extends EditCommand {
     this.placements = placements;
     this.collected = shapes;
     this.insertion = { parent, index };
-    return `${group.reference} created with ${shapes.length} children`;
+    return `${group.reference} created with ${NounCount.of(shapes.length, 'child', 'children')}`;
   }
 
   undo(): string {
@@ -67,7 +68,7 @@ export class GroupCommand extends EditCommand {
       group.removeChild(entry.shape);
       entry.placement.parent.insertChild(entry.placement.index, entry.shape);
     }
-    return `${group.reference} dissolved (${this.collected.length} children restored)`;
+    return `${group.reference} dissolved (${NounCount.of(this.collected.length, 'child', 'children')} restored)`;
   }
 
   redo(): string {
@@ -77,7 +78,7 @@ export class GroupCommand extends EditCommand {
     for (const shape of this.collected) insertion.parent.removeChild(shape);
     insertion.parent.insertChild(insertion.index, group);
     for (const shape of this.collected) group.appendChild(shape);
-    return `${group.reference} created with ${this.collected.length} children`;
+    return `${group.reference} created with ${NounCount.of(this.collected.length, 'child', 'children')}`;
   }
 
   /** A container and one of its own descendants cannot end up as siblings. */

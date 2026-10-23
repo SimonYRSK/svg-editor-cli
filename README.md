@@ -10,7 +10,7 @@ Lab1 Phase 1 作业：一个用 TypeScript 写的 SVG 编辑器命令行（REPL�
 ```bash
 npm install          # 开发依赖：typescript / vitest / tsx（运行时零依赖）
 npm run cli          # 启动交互式编辑器
-npm test             # 186 个用例
+npm test             # 187 个用例
 npm run typecheck    # strict 模式类型检查（含 tests/）
 npm run build        # 编译到 dist/，可用 node dist/main.js 启动
 ```
@@ -61,7 +61,7 @@ src/io/             持久化：SVG reader/writer、XML 解析、FileStore
 src/app/            应用层：Command / EditCommand / History / Editor / 各命令类
 src/presentation/   表示层：分词、行解释、tree/show 格式化、REPL
 src/CompositionRoot.ts, src/main.ts   组合根与入口
-tests/              186 个用例（含作业 transcript 逐行回放与依赖方向校验）
+tests/              187 个用例（含作业 transcript 逐行回放与依赖方向校验）
 doc/README.md       架构与过程文档（提交要求的那份）
 examples/           可回放脚本与示例 SVG
 ```

@@ -1,5 +1,6 @@
 import { ScaleFactorError } from '../../model/errors/ScaleFactorError.js';
 import { UsageError } from '../../model/errors/UsageError.js';
+import { NounCount } from '../../model/text/NounCount.js';
 import { NumberText } from '../../model/geometry/NumberText.js';
 import { ContainerShape } from '../../model/shapes/ContainerShape.js';
 import type { Shape } from '../../model/shapes/Shape.js';
@@ -51,7 +52,7 @@ export class ScaleCommand extends EditCommand {
     const direction = reverted ? 'back ' : '';
     const scale = NumberText.format(factor);
     if (shape instanceof ContainerShape) {
-      return `${shape.reference} scaled ${direction}by ${scale} (${this.states.length} shapes)`;
+      return `${shape.reference} scaled ${direction}by ${scale} (${NounCount.of(this.states.length, 'shape')})`;
     }
     return `${shape.reference} scaled ${direction}by ${scale} to ${shape.describeGeometry()}`;
   }
