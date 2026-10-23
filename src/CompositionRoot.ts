@@ -28,6 +28,7 @@ import { ShowCommand } from './presentation/cli/commands/ShowCommand.js';
 import { TreeCommand } from './presentation/cli/commands/TreeCommand.js';
 import { LineInterpreter } from './presentation/cli/LineInterpreter.js';
 import { Repl } from './presentation/cli/Repl.js';
+import type { ReplOptions } from './presentation/cli/ReplOptions.js';
 import { ShowFormatter } from './presentation/cli/ShowFormatter.js';
 import { TreeFormatter } from './presentation/cli/TreeFormatter.js';
 
@@ -91,7 +92,7 @@ export class CompositionRoot {
     return new LineInterpreter(registry, editor);
   }
 
-  createRepl(input: Readable, output: Writable): Repl {
-    return new Repl(input, output, this.createInterpreter());
+  createRepl(input: Readable, output: Writable, options: ReplOptions = {}): Repl {
+    return new Repl(input, output, this.createInterpreter(), options);
   }
 }

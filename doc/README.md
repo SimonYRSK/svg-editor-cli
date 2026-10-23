@@ -16,7 +16,7 @@
 | `src/model/` | **领域模型**：图形树、几何、文档、错误语义。不依赖任何其它层，也不做 IO、不做解析、不做打印 | `Shape`（抽象根）、`ContainerShape`、`Group`、`Rect`、`Circle`、`Ellipse`、`Line`、`Text`、`RootNode`、`Document`、`ShapeTypeRegistry`、`ShapeTypeProvider`、`EditorError` 及其 25 个子类、`NumberText`、`Point`、`NounCount` |
 | `src/io/` | **持久化适配**：SVG 文本 <-> `Document`，以及唯一的文件系统访问点 | `SvgReader`、`SvgWriter`、`XmlTreeParser`、`AutoIdAssigner`、`FileStore`（接口）、`NodeFileStore` |
 | `src/app/` | **应用层**：命令对象、撤销栈、编辑器会话。它是"用户意图"的落点，不含任何终端 / 文件系统细节 | `Command`（接口）、`EditCommand`、`CommandRegistry`、`History`、`Editor`、`commands/*Command`（15 个命令类，覆盖 16 个命令名） |
-| `src/presentation/cli/` | **表示层**：分词、行解释（invoker）、树/明细格式化、REPL 循环 | `LineTokenizer`、`LineInterpreter`、`TreeFormatter`、`ShowFormatter`、`Repl`、`commands/TreeCommand|ShowCommand|HelpCommand|ExitCommand` |
+| `src/presentation/cli/` | **表示层**：分词、行解释（invoker）、树/明细格式化、REPL 循环 | `LineTokenizer`、`LineInterpreter`、`TreeFormatter`、`ShowFormatter`、`Repl`（按输入是否终端自动切换交互/脚本两种模式）、`commands/TreeCommand|ShowCommand|HelpCommand|ExitCommand` |
 | `src/CompositionRoot.ts`、`src/main.ts` | **组合根**：唯一可以同时认识全部层的地方，负责把注册表、编解码器、文件存储、命令对象装配起来 | `CompositionRoot` |
 
 一个类一个文件，文件名等于类名（`Rect.ts` / `RectProvider.ts` / `MoveCommand.ts` …），测试放 `tests/`。
@@ -253,6 +253,20 @@ npm error Your cache folder contains root-owned files ...
 1. **数量词**：`group` / `ungroup` / `scale` / `read` / `save` 的回显都带数量，n=1 时原先会打成 "1 children"。抽出 `NounCount` 值对象统一处理单复数（`1 child` / `2 children`），五个命令共用一处规则。作业样例从未出现 n=1 的句子，因此不影响与样例逐字符一致。
 2. **标点**：代码注释里统一不用长破折号，改用冒号、逗号或括号（替换后逐条复查了 `Document`、`LineInterpreter` 两处读起来别扭的句子并重写）。这一条不改变任何行为，只是让注释在纯文本编辑器里也稳定可读。
 
+### 2.10 用户报"终端没反应"之后：两条路径只测了一条
+
+交付后用户按 README 的代码块一次粘贴四行命令，看到终端停在 banner 之后不动。用 `script` 分配伪终端复现：
+
+- 慢速逐行输入：banner、`svg> ` 提示符、命令回显与结果全部正常，程序本身没坏；
+- 一次粘贴多行：`npm run cli` 是前台阻塞的交互程序，它占住前台，后三行轮不到 shell 执行，于是"没反应"。
+
+复现过程顺带暴露出两个真实缺陷，均已修：
+
+1. **`Repl` 把 readline 的 `terminal` 硬编码成 `false`**。管道输入时这是对的，但真人交互时 readline 不进行编辑模式，方向键、历史、Ctrl-C 都不正常。改为按 `input.isTTY` 自动判定，并允许用 `ReplOptions.interactive` 显式覆盖。
+2. **管道模式下仍打印 `svg> ` 提示符**，污染脚本输出。现在只在交互模式打印，`npm run cli < examples/session-basic.txt` 的输出可以直接逐行比对。
+
+**这条教训最值得记**：此前的 REPL 测试全部用 `PassThrough`（非终端）驱动，等于只验证了"脚本模式"这一条路径，真实终端那条路径从未被执行过。"凡是有 TTY / 非 TTY 双路径的代码，两条路径都要有测试或至少一次伪终端冒烟"，现在 `tests/Repl.test.ts` 两种模式各有用例（189 个用例）。
+
 ---
 
 ## 3. 一致性自查
@@ -299,7 +313,7 @@ npm error Your cache folder contains root-owned files ...
 
 | 手段 | 结果 |
 |---|---|
-| `npm test`（vitest，9 个文件） | **187 个用例全部通过** |
+| `npm test`（vitest，9 个文件） | **189 个用例全部通过** |
 | `npm run typecheck`（`strict` + `noImplicitOverride` + `noUnusedLocals/Parameters`，覆盖 `src` 与 `tests`） | 0 错误 |
 | `npm run build`（`tsc` 到 `dist/`，NodeNext ESM） | 成功，`node dist/main.js` 可直接运行 |
 | 架构规则测试 | 依赖方向、`node:fs` 位置、禁用 `switch` 三条硬规则机械守住 |
