@@ -3,7 +3,7 @@ import type { Command } from '../../../app/Command.js';
 import type { Editor } from '../../../app/Editor.js';
 import type { ShowFormatter } from '../ShowFormatter.js';
 
-/** `show <id>` — every attribute of one shape. */
+/** `show <id>`: every attribute of one shape. */
 export class ShowCommand implements Command {
   readonly name = 'show';
   readonly syntax = 'show <id>';

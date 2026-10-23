@@ -5,7 +5,7 @@ import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `front <id>` / `back <id>` — moves a shape to the top or bottom of its own
+ * `front <id>` / `back <id>`: moves a shape to the top or bottom of its own
  * sibling list (z-order). Both words are instances of this class with a
  * different `mode`, which keeps the stacking rule in one place.
  */

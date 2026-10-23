@@ -2,7 +2,7 @@ import { UsageError } from '../../model/errors/UsageError.js';
 import type { Command } from '../Command.js';
 import type { Editor } from '../Editor.js';
 
-/** `undo` — reverts the last edit command. */
+/** `undo`: reverts the last edit command. */
 export class UndoCommand implements Command {
   readonly name = 'undo';
   readonly syntax = 'undo';

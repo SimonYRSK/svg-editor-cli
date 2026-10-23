@@ -6,7 +6,7 @@ import { EditCommand, type ShapeStateEntry } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `move <id> <dx> <dy>` — incremental translation.
+ * `move <id> <dx> <dy>`: incremental translation.
  *
  * On a container the base class recursion moves every descendant, which is the
  * Composite behaviour the assignment asks for: the command does not know

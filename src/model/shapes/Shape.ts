@@ -50,7 +50,7 @@ export abstract class Shape {
     return this.tagName;
   }
 
-  /** `rect#r1` — how a shape names itself in command output. */
+  /** `rect#r1`: how a shape names itself in command output. */
   get reference(): string {
     return `${this.tagName}#${this.shapeId}`;
   }

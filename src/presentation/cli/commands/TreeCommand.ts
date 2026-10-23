@@ -3,7 +3,7 @@ import type { Command } from '../../../app/Command.js';
 import type { Editor } from '../../../app/Editor.js';
 import type { TreeFormatter } from '../TreeFormatter.js';
 
-/** `tree [id]` — structure of the whole document, or of one subtree. */
+/** `tree [id]`: structure of the whole document, or of one subtree. */
 export class TreeCommand implements Command {
   readonly name = 'tree';
   readonly syntax = 'tree [id]';

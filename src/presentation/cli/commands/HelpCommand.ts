@@ -2,7 +2,7 @@ import type { Command } from '../../../app/Command.js';
 import type { CommandRegistry } from '../../../app/CommandRegistry.js';
 import type { Editor } from '../../../app/Editor.js';
 
-/** `help` — every registered command with its syntax. Built from the registry, never hard coded. */
+/** `help`: every registered command with its syntax. Built from the registry, never hard coded. */
 export class HelpCommand implements Command {
   readonly name = 'help';
   readonly syntax = 'help';

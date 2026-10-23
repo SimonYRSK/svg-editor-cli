@@ -5,7 +5,7 @@ import type { SvgWriter } from '../../io/SvgWriter.js';
 import type { Command } from '../Command.js';
 import type { Editor } from '../Editor.js';
 
-/** `save [file.svg]` — writes the document; without a path it reuses the last one. */
+/** `save [file.svg]`: writes the document; without a path it reuses the last one. */
 export class SaveCommand implements Command {
   readonly name = 'save';
   readonly syntax = 'save [file.svg]';

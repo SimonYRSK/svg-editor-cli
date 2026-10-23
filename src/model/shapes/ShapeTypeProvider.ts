@@ -5,7 +5,7 @@ import type { Shape } from './Shape.js';
  *
  * A provider owns everything type specific: the CLI parameter schema used by
  * `create`, the construction from SVG attributes used by `read`, and the
- * instance itself.  The kernel therefore never switches on a type name — it
+ * instance itself.  The kernel therefore never switches on a type name: it
  * asks the registry for a provider and calls this interface.
  */
 export interface ShapeTypeProvider {

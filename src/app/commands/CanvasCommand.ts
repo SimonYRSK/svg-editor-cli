@@ -4,7 +4,7 @@ import { NumberText } from '../../model/geometry/NumberText.js';
 import type { Command } from '../Command.js';
 import type { Editor } from '../Editor.js';
 
-/** `canvas [w] [h]` — shows the canvas size, or resizes it. */
+/** `canvas [w] [h]`: shows the canvas size, or resizes it. */
 export class CanvasCommand implements Command {
   readonly name = 'canvas';
   readonly syntax = 'canvas [w] [h]';

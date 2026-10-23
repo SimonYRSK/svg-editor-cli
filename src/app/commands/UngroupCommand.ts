@@ -8,7 +8,7 @@ import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `ungroup <gid>` — dissolves a container, promoting its children into the
+ * `ungroup <gid>`: dissolves a container, promoting its children into the
  * parent container at the position the group occupied.
  *
  * Two refusals are part of the contract: a composite shape cannot be ungrouped

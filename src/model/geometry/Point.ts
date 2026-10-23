@@ -18,7 +18,7 @@ export class Point {
     return new Point(this.x * factor, this.y * factor);
   }
 
-  /** `(x,y)` — the notation used inside `tree` and `show` output. */
+  /** `(x,y)`: the notation used inside `tree` and `show` output. */
   toString(): string {
     return `(${NumberText.format(this.x)},${NumberText.format(this.y)})`;
   }

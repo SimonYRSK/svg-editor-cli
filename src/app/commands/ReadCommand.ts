@@ -4,7 +4,7 @@ import type { SvgReader } from '../../io/SvgReader.js';
 import type { Command } from '../Command.js';
 import type { Editor } from '../Editor.js';
 
-/** `read <file.svg>` — replaces the session with the content of an SVG file. */
+/** `read <file.svg>`: replaces the session with the content of an SVG file. */
 export class ReadCommand implements Command {
   readonly name = 'read';
   readonly syntax = 'read <file.svg>';

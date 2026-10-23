@@ -7,7 +7,7 @@ import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `group <newGid> <id1> <id2>…` — collects existing shapes into a new container.
+ * `group <newGid> <id1> <id2>…`: collects existing shapes into a new container.
  *
  * The new container takes the place of the first listed shape, so the visual
  * stacking order is preserved. Every listed shape keeps its order inside the

@@ -5,7 +5,7 @@ import { NumberText } from '../../model/geometry/NumberText.js';
 import type { Command } from '../Command.js';
 import type { Editor } from '../Editor.js';
 
-/** `init [w] [h]` — replaces the session with a new empty canvas. */
+/** `init [w] [h]`: replaces the session with a new empty canvas. */
 export class InitCommand implements Command {
   readonly name = 'init';
   readonly syntax = 'init [w] [h]';

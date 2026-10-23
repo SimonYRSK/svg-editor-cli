@@ -6,7 +6,7 @@ import type { Shape } from '../../model/shapes/Shape.js';
 import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
-/** `addto <gid> <id>` — moves an existing shape into a container (as last child). */
+/** `addto <gid> <id>`: moves an existing shape into a container (as last child). */
 export class AddToCommand extends EditCommand {
   readonly name = 'addto';
   readonly syntax = 'addto <gid> <id>';

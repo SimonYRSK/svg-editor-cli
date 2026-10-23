@@ -32,7 +32,7 @@ import { ShowFormatter } from './presentation/cli/ShowFormatter.js';
 import { TreeFormatter } from './presentation/cli/TreeFormatter.js';
 
 /**
- * The composition root — the only place that knows every layer at once.
+ * The composition root: the only place that knows every layer at once.
  *
  * Wiring lives here and nowhere else: the kernel type registry is built, the
  * shape codec and the file store are chosen, the command objects are created

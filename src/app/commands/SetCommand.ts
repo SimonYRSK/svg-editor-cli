@@ -7,7 +7,7 @@ import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `set <id> <attr> <value>` — changes one whitelisted attribute.
+ * `set <id> <attr> <value>`: changes one whitelisted attribute.
  *
  * The whitelist lives on the shape (`Shape.setAttribute` + the per-type
  * geometry hook), so this command stays a thin shell: validate the arguments,

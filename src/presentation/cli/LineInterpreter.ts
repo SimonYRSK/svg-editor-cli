@@ -10,8 +10,8 @@ import { LineTokenizer } from './LineTokenizer.js';
  * The invoker of the Command pattern: one line in, transcript lines out.
  *
  * It performs, in order: comment / blank line filter, tokenising, lookup in the
- * command registry, execution, and — only when the executed command is an
- * `EditCommand` — pushing that very object onto the undo stack. Errors never
+ * command registry, execution, and (only when the executed command is an
+ * `EditCommand`) pushing that very object onto the undo stack. Errors never
  * escape as exceptions: an `EditorError` becomes one `error: ...` line, which is
  * how the assignment's "a failed command changes nothing" rule is kept.
  */

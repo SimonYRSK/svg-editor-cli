@@ -7,7 +7,7 @@ import { EditCommand, type ShapeStateEntry } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
 /**
- * `scale <id> <factor>` — multiplies every geometric attribute by `factor`.
+ * `scale <id> <factor>`: multiplies every geometric attribute by `factor`.
  *
  * Note that this is *not* a `transform="scale(...)"`: coordinates really change,
  * so the saved SVG stays readable and the tree keeps showing real numbers. On a

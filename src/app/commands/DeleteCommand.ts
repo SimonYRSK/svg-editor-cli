@@ -4,7 +4,7 @@ import type { Shape } from '../../model/shapes/Shape.js';
 import { EditCommand } from '../EditCommand.js';
 import type { Editor } from '../Editor.js';
 
-/** `delete <id>` — removes a shape, or a container with its whole subtree. */
+/** `delete <id>`: removes a shape, or a container with its whole subtree. */
 export class DeleteCommand extends EditCommand {
   readonly name = 'delete';
   readonly syntax = 'delete <id>';

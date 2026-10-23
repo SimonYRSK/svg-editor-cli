@@ -12,9 +12,9 @@ import type { Placement } from './Placement.js';
  * The open drawing: a canvas size, the `<svg>` root, and the shape tree.
  *
  * The document is the only owner of the tree.  Everything a command needs to
- * do — look a shape up by id, detach it together with its position, insert it
- * back — is offered here, so no command manipulates child lists by hand and id
- * uniqueness is enforced in exactly one place.
+ * do is offered here (look a shape up by id, detach it together with its
+ * position, insert it back), so no command manipulates child lists by hand and
+ * id uniqueness is enforced in exactly one place.
  */
 export class Document {
   private readonly rootNode: RootNode;
