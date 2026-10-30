@@ -1,7 +1,12 @@
 # Lab1 Phase 1：SVG 编辑器（CLI）设计文档
 
-> 代码：TypeScript + 面向对象，零运行时依赖（`typescript` / `vitest` / `tsx` 仅开发期使用）。
-> 运行入口：`npm run cli`；测试：`npm test`；类型检查：`npm run typecheck`；构建：`npm run build`。
+| 项 | 值 |
+|---|---|
+| 仓库 | <https://github.com/SimonYRSK/svg-editor-cli> |
+| 最终标签 | `final`（打在最后一个提交上） |
+| 默认分支 | `main` |
+| 技术栈 | TypeScript + 面向对象，运行时零依赖（`typescript` / `vitest` / `tsx` 仅开发期使用） |
+| 运行 | `npm install`，然后 `npm run cli`；`npm test`；`npm run typecheck`；`npm run build` |
 
 ---
 
@@ -253,9 +258,9 @@ npm error Your cache folder contains root-owned files ...
 1. **数量词**：`group` / `ungroup` / `scale` / `read` / `save` 的回显都带数量，n=1 时原先会打成 "1 children"。抽出 `NounCount` 值对象统一处理单复数（`1 child` / `2 children`），五个命令共用一处规则。作业样例从未出现 n=1 的句子，因此不影响与样例逐字符一致。
 2. **标点**：代码注释里统一不用长破折号，改用冒号、逗号或括号（替换后逐条复查了 `Document`、`LineInterpreter` 两处读起来别扭的句子并重写）。这一条不改变任何行为，只是让注释在纯文本编辑器里也稳定可读。
 
-### 2.10 用户报"终端没反应"之后：两条路径只测了一条
+### 2.10 交付后实测：同一功能的两条路径只测了一条
 
-交付后用户按 README 的代码块一次粘贴四行命令，看到终端停在 banner 之后不动。用 `script` 分配伪终端复现：
+按 README 的快速开始实际执行时（把四行命令一次粘贴进终端），终端停在 banner 之后不再输出。用 `script` 分配伪终端复现：
 
 - 慢速逐行输入：banner、`svg> ` 提示符、命令回显与结果全部正常，程序本身没坏；
 - 一次粘贴多行：`npm run cli` 是前台阻塞的交互程序，它占住前台，后三行轮不到 shell 执行，于是"没反应"。

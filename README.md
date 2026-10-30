@@ -3,7 +3,9 @@
 Lab1 Phase 1 作业：一个用 TypeScript 写的 SVG 编辑器命令行（REPL），
 以 **Command** 与 **Composite** 模式为主干，带 undo/redo、SVG 读写与自动补 id。
 
-设计与过程文档见 [`doc/README.md`](doc/README.md)（架构方案、设计模式、依赖方向、变化点假设、过程记录、一致性自查、质量保证）。
+- 仓库：<https://github.com/SimonYRSK/svg-editor-cli>
+- 最终标签：`final`（最后一个提交）
+- 设计与过程文档：[`doc/README.md`](doc/README.md)（架构方案、设计模式、依赖方向、变化点假设、过程记录、一致性自查、质量保证）
 
 ## 快速开始
 
